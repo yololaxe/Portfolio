@@ -14,8 +14,16 @@
   }
 }
 
+.finisher-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* ✅ Place l'animation derrière */
+  background: transparent !important; /* ✅ Supprime les conflits */
+}
+
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to bottom, #1e293b, #0f172a); /* ✅ Applique ton background personnalisé */
 }
