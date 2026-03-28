@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import BackgroundEffect from "@/components/BackgroundEffect"; // Import du composant
+import BackgroundEffectWrapper from "@/components/BackgroundEffectWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,16 +18,19 @@ export const metadata: Metadata = {
   description: "Mon Portfolio",
 };
 
-<head>
-  <link rel="icon" href="/favicon.png" /> {/* ou ton autre fichier */}
-</head>
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
-      <body className="finisher-header"> {/* ✅ Ajoute bien la classe ici */}
-        <BackgroundEffect /> {/* ✅ Charge l'animation */}
-        <main className="relative z-10">{children}</main> {/* ✅ Contenu passe au-dessus */}
+    <html lang="fr" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Police style Gaming / Cyberpunk */}
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet" />
+      </head>
+      <body className="bg-slate-950 text-slate-100 font-sans min-h-screen relative" suppressHydrationWarning>
+        <BackgroundEffectWrapper />
+        <main className="relative z-10 min-h-screen">{children}</main>
       </body>
     </html>
   );

@@ -3,27 +3,57 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-.finisher-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1; /* ✅ Place l'animation derrière */
-  background: transparent !important; /* ✅ Supprime les conflits */
+  --background: #0f172a;
+  --foreground: #f8fafc;
 }
 
 body {
-  background: linear-gradient(to bottom, #1e293b, #0f172a); /* ✅ Applique ton background personnalisé */
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  /* Fix scroll */
+  overflow-y: auto;
+}
+
+/* Cleanup Finisher canvas behavior */
+canvas#finisher-canvas {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  @apply bg-slate-900/40 backdrop-blur-xl border border-slate-700/50 shadow-xl;
+}
+
+/* Text gradients */
+.text-gradient-pro {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300;
+}
+
+.text-gradient-hobby {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-yellow-300;
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }
