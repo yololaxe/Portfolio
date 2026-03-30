@@ -20,7 +20,9 @@ const TWITTER_USER_ID = process.env.TWITTER_USER_ID || '';
 // Obtenez un jeton d'accès (Access Token) via l'API Instagram Basic Display ou Graph API
 const INSTAGRAM_ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN || '';
 
-export const revalidate = 3600; // Cache d'une heure (3600 secondes) pour éviter d'exploser les quotas API
+// Cache d'une heure (3600 secondes)
+// Attention: Si vous testez avec Next.js dev server, ce cache n'est pas toujours respecté.
+export const revalidate = 3600; 
 
 type Post = {
   platform: string;
@@ -70,10 +72,16 @@ export async function GET() {
     // --- FETCH TWITTER ---
     if (TWITTER_BEARER_TOKEN && TWITTER_USER_ID) {
       try {
-        const twRes = await fetch(`https://api.twitter.com/2/users/${TWITTER_USER_ID}/tweets?tweet.fields=created_at&max_results=3`, {
+        // Ajout de query parameters pour éviter de mettre les clés API en dur dans l'URL
+        const twRes = await fetch(`https://api.twitter.com/2/users/${TWITTER_USER_ID}/tweets?tweet.fields=created_at&max_results=5`, {
           headers: { Authorization: `Bearer ${TWITTER_BEARER_TOKEN}` }
         });
         const twData = await twRes.json();
+
+        // Parfois Twitter renvoie une erreur si les quotas sont dépassés ou si l'API est mal configurée
+        if (twData.errors) {
+            console.error("Erreur API Twitter (Réponse serveur) :", twData.errors);
+        }
         
         if (twData.data) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -101,8 +109,11 @@ export async function GET() {
         const igRes = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp&access_token=${INSTAGRAM_ACCESS_TOKEN}&limit=3`);
         const igData = await igRes.json();
         
+        if (igData.error) {
+            console.error("Erreur API Instagram (Réponse serveur) :", igData.error);
+        }
+
         if (igData.data) {
-          // Filtre et ajout des posts
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           igData.data.forEach((media: any) => {
             posts.push({

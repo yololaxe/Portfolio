@@ -17,6 +17,7 @@ const socialLinks = [
 ];
 
 export default function ReseauxPage() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -64,7 +65,7 @@ export default function ReseauxPage() {
       <div className="fixed top-[20%] right-[10%] w-[30vw] h-[30vw] bg-purple-600/10 rounded-full blur-[150px] pointer-events-none mix-blend-screen"></div>
       <div className="fixed bottom-[10%] left-[10%] w-[40vw] h-[40vw] bg-orange-600/10 rounded-full blur-[150px] pointer-events-none mix-blend-screen"></div>
 
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -79,139 +80,141 @@ export default function ReseauxPage() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* CONTENU PRINCIPAL */}
+        <div className="flex flex-col gap-12">
           
-          {/* LECTEUR TWITCH ET LIENS - COLONNE PRINCIPALE */}
-          <div className="lg:col-span-8 space-y-8">
+          {/* HAUT : LECTEUR TWITCH (Pleine largeur sur desktop) */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="w-full rounded-3xl overflow-hidden bg-[#111] border border-purple-500/30 shadow-[0_0_40px_rgba(168,85,247,0.15)] relative"
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-purple-400"></div>
             
-            {/* LECTEUR TWITCH */}
-            <motion.section
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="rounded-3xl overflow-hidden bg-[#111] border border-purple-500/30 shadow-[0_0_40px_rgba(168,85,247,0.15)] group relative"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-purple-400"></div>
-              
-              <div className="p-4 sm:p-6 flex items-center justify-between bg-[#0a0a0a]/50 border-b border-slate-800">
-                <div className="flex items-center gap-4">
-                  <div className="relative">
-                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-500">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src="/avatar.png" alt="Yololaxe Twitch" className="w-full h-full object-cover" />
-                    </div>
-                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-[#111]"></div>
+            <div className="p-4 sm:p-6 flex items-center justify-between bg-[#0a0a0a]/50 border-b border-slate-800">
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-500">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/avatar.png" alt="Yololaxe Twitch" className="w-full h-full object-cover" />
                   </div>
-                  <div>
-                    <h2 className="font-tech font-bold text-xl text-slate-200">yololaxe</h2>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                      <span className="text-red-400 font-bold text-xs uppercase tracking-wider">Sur Twitch</span>
-                    </div>
+                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-[#111]"></div>
+                </div>
+                <div>
+                  <h2 className="font-tech font-bold text-xl text-slate-200">yololaxe</h2>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                    <span className="text-red-400 font-bold text-xs uppercase tracking-wider">Sur Twitch</span>
                   </div>
                 </div>
-                <a 
-                  href="https://www.twitch.tv/yololaxe" 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white font-tech font-bold text-sm uppercase tracking-wider rounded transition-colors"
-                >
-                  Regarder
-                </a>
               </div>
-
-              {/* INTEGRATION PLAYER TWITCH (Iframe) */}
-              <div className="w-full aspect-video bg-black relative">
-                {/* 
-                  Remplacer 'yololaxe' par votre vrai pseudo twitch dans l'URL iframe.
-                  'parent=localhost' est nécessaire pour tester en local. Modifiez-le avec votre nom de domaine en prod.
-                */}
-                <iframe
-                    src={`https://player.twitch.tv/?channel=yololaxe&parent=localhost&parent=127.0.0.1`}
-                    height="100%"
-                    width="100%"
-                    allowFullScreen
-                    className="absolute inset-0"
-                ></iframe>
-              </div>
-            </motion.section>
-
-            {/* BOUTONS RESEAUX (Ligne sous le lecteur) */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4"
-            >
-              {socialLinks.map((link) => (
-                <a key={link.name} href={link.url} target="_blank" rel="noreferrer" className={`flex flex-col items-center justify-center p-4 bg-[#111] border border-slate-800 ${link.border} rounded-2xl group transition-all`}>
-                  <div className={`text-slate-400 group-hover:${link.color} mb-2 transition-colors`}>{link.icon}</div>
-                  <span className="font-tech font-bold text-sm tracking-wider text-slate-300">{link.name}</span>
-                </a>
-              ))}
-            </motion.section>
-          </div>
-
-          {/* FIL D'ACTUALITÉ / FEED - COLONNE LATERALE */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-4"
-          >
-            <div className="bg-[#111] border border-slate-800 rounded-3xl overflow-hidden h-full flex flex-col">
-              <div className="p-6 border-b border-slate-800 bg-[#0a0a0a]/50 flex items-center justify-between">
-                <h3 className="font-gaming uppercase text-orange-400 tracking-wider">Feed d&apos;Actu</h3>
-                <span className="flex h-3 w-3 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
-                </span>
-              </div>
-              
-              <div className="p-4 flex-1 overflow-y-auto space-y-4 custom-scrollbar max-h-[600px] lg:max-h-[800px]">
-                {loading ? (
-                   <div className="flex flex-col items-center justify-center h-40 space-y-4">
-                     <div className="w-8 h-8 border-4 border-orange-500/30 border-t-orange-500 rounded-full animate-spin"></div>
-                     <p className="font-tech text-slate-500">Chargement des réseaux...</p>
-                   </div>
-                ) : posts.map((post, idx) => (
-                  <a 
-                    key={idx} 
-                    href={post.link} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="block p-5 rounded-2xl bg-[#0a0a0a] border border-slate-800/60 hover:border-orange-500/30 transition-colors group"
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${post.bg} ${post.color}`}>
-                          <div className="scale-75">{getPlatformIcon(post.platform)}</div>
-                        </div>
-                        <div>
-                          <p className="font-tech font-bold text-sm text-slate-200">{post.handle}</p>
-                          <p className="font-tech text-xs text-slate-500">{post.date}</p>
-                        </div>
-                      </div>
-                      <div className={`opacity-0 group-hover:opacity-100 transition-opacity ${post.color}`}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                      </div>
-                    </div>
-                    
-                    <p className="text-slate-300 text-sm leading-relaxed mb-3">
-                      {post.content}
-                    </p>
-
-                    {post.image && (
-                      <div className="w-full h-32 rounded-lg overflow-hidden border border-slate-800 mb-2">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={post.image} alt="Post preview" className="w-full h-full object-cover grayscale mix-blend-luminosity group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-500" />
-                      </div>
-                    )}
-                  </a>
-                ))}
-              </div>
+              <a 
+                href="https://www.twitch.tv/yololaxe" 
+                target="_blank" 
+                rel="noreferrer"
+                className="hidden sm:inline-flex px-6 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-tech font-bold text-sm uppercase tracking-wider rounded transition-colors"
+              >
+                Regarder sur Twitch
+              </a>
             </div>
-          </motion.div>
+
+            {/* INTEGRATION PLAYER TWITCH */}
+            <div className="w-full aspect-video bg-black relative max-h-[60vh] mx-auto">
+              <iframe
+                  src={`https://player.twitch.tv/?channel=yololaxe&parent=localhost&parent=127.0.0.1`}
+                  height="100%"
+                  width="100%"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+              ></iframe>
+            </div>
+          </motion.section>
+
+          {/* MILIEU : BOUTONS RESEAUX (Grille fluide) */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+          >
+            {socialLinks.map((link) => (
+              <a key={link.name} href={link.url} target="_blank" rel="noreferrer" className={`flex flex-col items-center justify-center p-6 bg-[#111] border border-slate-800 ${link.border} rounded-3xl group transition-all hover:-translate-y-1 hover:shadow-lg`}>
+                <div className={`text-slate-400 group-hover:${link.color} mb-3 transition-colors scale-125`}>{link.icon}</div>
+                <span className="font-tech font-bold text-base tracking-wider text-slate-300 group-hover:text-white">{link.name}</span>
+              </a>
+            ))}
+          </motion.section>
+
+          {/* BAS : FIL D'ACTUALITÉ (Grille responsive) */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-8"
+          >
+            <div className="flex items-center gap-4 mb-8 justify-center">
+              <div className="h-px w-12 sm:w-24 bg-gradient-to-r from-transparent to-orange-500/50"></div>
+              <h2 className="text-3xl font-bold uppercase font-gaming text-orange-400 tracking-wider">
+                Dernières Actus
+              </h2>
+              <div className="h-px w-12 sm:w-24 bg-gradient-to-l from-transparent to-orange-500/50"></div>
+            </div>
+
+            {loading ? (
+                <div className="flex flex-col items-center justify-center h-40 space-y-4">
+                  <div className="w-10 h-10 border-4 border-orange-500/30 border-t-orange-500 rounded-full animate-spin"></div>
+                  <p className="font-tech text-slate-400 text-lg">Chargement du feed spatial...</p>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {posts.map((post, idx) => (
+                    <a 
+                      key={idx} 
+                      href={post.link} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="flex flex-col bg-[#111] border border-slate-800/80 rounded-3xl hover:border-orange-500/50 transition-all duration-300 group overflow-hidden hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(249,115,22,0.1)]"
+                    >
+                      {/* Image du post (si existante) */}
+                      {post.image && (
+                        <div className="w-full aspect-video bg-black relative overflow-hidden">
+                          {/* Filtre plus doux : pas de grayscale total, juste un léger assombrissement qui s'enlève au hover */}
+                          <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img 
+                            src={post.image} 
+                            alt="Post cover" 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                          />
+                        </div>
+                      )}
+
+                      <div className="p-6 flex-1 flex flex-col">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${post.bg} ${post.color}`}>
+                              <div className="scale-90">{getPlatformIcon(post.platform)}</div>
+                            </div>
+                            <div>
+                              <p className="font-tech font-bold text-sm text-slate-200 group-hover:text-white transition-colors">{post.handle}</p>
+                              <p className="font-tech text-xs text-slate-500">{post.date}</p>
+                            </div>
+                          </div>
+                          <div className={`opacity-0 group-hover:opacity-100 transition-opacity ${post.color}`}>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                          </div>
+                        </div>
+                        
+                        <p className="text-slate-300 text-base leading-relaxed font-tech mt-2 group-hover:text-slate-200 transition-colors line-clamp-4">
+                          {post.content}
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+            )}
+          </motion.section>
 
         </div>
 
