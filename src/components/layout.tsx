@@ -17,14 +17,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Portfolio",
   description: "Mon Portfolio",
+  icons: {
+    icon: "/avatar.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon.png" />
-      </head>
+    <html lang="fr" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="finisher-header bg-slate-950 text-slate-100 font-sans" suppressHydrationWarning>
         <BackgroundEffect />
         <main className="relative z-10">{children}</main>

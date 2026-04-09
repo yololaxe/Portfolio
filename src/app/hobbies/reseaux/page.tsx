@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import LanguageToggle from "@/components/LanguageToggle";
+import { useLanguage } from "@/components/LanguageProvider";
 
 // --- SVG Icons for Social Media ---
 const TwitterIcon = () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>;
@@ -20,8 +23,12 @@ export default function ReseauxPage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [hostname, setHostname] = useState("localhost");
+  const { t } = useLanguage();
 
   useEffect(() => {
+    setHostname(window.location.hostname);
+    
     async function fetchPosts() {
       try {
         const res = await fetch('/api/socials');
@@ -49,6 +56,7 @@ export default function ReseauxPage() {
 
   return (
     <div className="bg-[#0a0a0a] text-slate-200 min-h-screen selection:bg-orange-500/30 overflow-hidden relative">
+      <LanguageToggle />
       
       {/* Background Cyberpunk / Tech Grid (Same as Home) */}
       <div className="fixed inset-0 z-0 opacity-10 pointer-events-none" style={{ 
@@ -73,10 +81,10 @@ export default function ReseauxPage() {
           className="text-center mb-16"
         >
           <h1 className="text-5xl sm:text-7xl font-bold tracking-widest uppercase font-gaming text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-400 to-orange-500 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]">
-            Hub Social
+            {t.social.title}
           </h1>
           <p className="mt-6 text-xl font-tech text-slate-400 max-w-2xl mx-auto">
-            Rejoignez la communauté, regardez les streams et suivez l&apos;avancement des projets en temps réel.
+            {t.social.subtitle}
           </p>
         </motion.div>
 
@@ -96,8 +104,7 @@ export default function ReseauxPage() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-500">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/avatar.png" alt="Yololaxe Twitch" className="w-full h-full object-cover" />
+                    <Image src="/avatar.png" alt="Yololaxe Twitch" width={48} height={48} className="w-full h-full object-cover" />
                   </div>
                   <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-[#111]"></div>
                 </div>
@@ -105,7 +112,7 @@ export default function ReseauxPage() {
                   <h2 className="font-tech font-bold text-xl text-slate-200">yololaxe</h2>
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                    <span className="text-red-400 font-bold text-xs uppercase tracking-wider">Sur Twitch</span>
+                    <span className="text-red-400 font-bold text-xs uppercase tracking-wider">{t.social.twitch.onTwitch}</span>
                   </div>
                 </div>
               </div>
@@ -115,19 +122,21 @@ export default function ReseauxPage() {
                 rel="noreferrer"
                 className="hidden sm:inline-flex px-6 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-tech font-bold text-sm uppercase tracking-wider rounded transition-colors"
               >
-                Regarder sur Twitch
+                {t.social.twitch.watch}
               </a>
             </div>
 
             {/* INTEGRATION PLAYER TWITCH */}
             <div className="w-full aspect-video bg-black relative max-h-[60vh] mx-auto">
-              <iframe
-                  src={`https://player.twitch.tv/?channel=yololaxe&parent=localhost&parent=127.0.0.1`}
+              {hostname && (
+                <iframe
+                  src={`https://player.twitch.tv/?channel=yololaxe&parent=${hostname}`}
                   height="100%"
                   width="100%"
                   allowFullScreen
                   className="absolute inset-0 w-full h-full"
-              ></iframe>
+                ></iframe>
+              )}
             </div>
           </motion.section>
 
@@ -156,7 +165,7 @@ export default function ReseauxPage() {
             <div className="flex items-center gap-4 mb-8 justify-center">
               <div className="h-px w-12 sm:w-24 bg-gradient-to-r from-transparent to-orange-500/50"></div>
               <h2 className="text-3xl font-bold uppercase font-gaming text-orange-400 tracking-wider">
-                Dernières Actus
+                {t.social.news}
               </h2>
               <div className="h-px w-12 sm:w-24 bg-gradient-to-l from-transparent to-orange-500/50"></div>
             </div>
@@ -164,7 +173,7 @@ export default function ReseauxPage() {
             {loading ? (
                 <div className="flex flex-col items-center justify-center h-40 space-y-4">
                   <div className="w-10 h-10 border-4 border-orange-500/30 border-t-orange-500 rounded-full animate-spin"></div>
-                  <p className="font-tech text-slate-400 text-lg">Chargement du feed spatial...</p>
+                  <p className="font-tech text-slate-400 text-lg">{t.social.loading}</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

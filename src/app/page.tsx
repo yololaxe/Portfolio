@@ -3,9 +3,12 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import LanguageToggle from "@/components/LanguageToggle";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     setIsMounted(true);
@@ -16,6 +19,8 @@ export default function Home() {
   return (
     <div className="relative min-h-[100svh] flex flex-col md:flex-row overflow-hidden w-full max-w-[100vw] text-slate-100 font-sans bg-slate-950" suppressHydrationWarning>
       
+      <LanguageToggle />
+
       {/* Background grain texture */}
       <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }}></div>
 
@@ -44,17 +49,14 @@ export default function Home() {
           </motion.div>
           
           <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 group-hover:-translate-y-2 transition-transform duration-500">
-            Profil <span className="text-gradient-pro block sm:inline mt-2 sm:mt-0">Pro</span>
+            {t.home.proTitle.split(' ')[0]} <span className="text-gradient-pro block sm:inline mt-2 sm:mt-0">{t.home.proTitle.split(' ')[1]}</span>
           </h2>
           
-          <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-10 font-medium max-w-sm">
-            Développeur <strong className="text-slate-200 font-semibold">Backend & IA</strong>. <br/>
-            Expériences, compétences et parcours technique.
-          </p>
+          <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-10 font-medium max-w-sm" dangerouslySetInnerHTML={{ __html: t.home.proSubtitle }} />
           
           <div className="flex items-center gap-3 text-sm font-bold tracking-wider uppercase text-blue-400 group-hover:text-blue-300 transition-colors">
             <span className="relative overflow-hidden group-hover:after:translate-x-0 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-blue-400 after:-translate-x-full after:transition-transform after:duration-300 pb-1">
-              Explorer
+              {t.home.proButton}
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:translate-x-2 transition-transform duration-300">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -94,17 +96,14 @@ export default function Home() {
           </motion.div>
           
           <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 group-hover:-translate-y-2 transition-transform duration-500">
-            Projets & <span className="text-gradient-hobby block sm:inline mt-2 sm:mt-0">Passions</span>
+            {t.home.hobbyTitle.split(' ')[0]} & <span className="text-gradient-hobby block sm:inline mt-2 sm:mt-0">{t.home.hobbyTitle.split(' ')[2]}</span>
           </h2>
           
-          <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-10 font-medium max-w-sm">
-            Créateur <strong className="text-slate-200 font-semibold">Jeu vidéo & Projets</strong>. <br/>
-            Mon univers créatif et réalisations persos.
-          </p>
+          <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-10 font-medium max-w-sm" dangerouslySetInnerHTML={{ __html: t.home.hobbySubtitle }} />
           
           <div className="flex items-center gap-3 text-sm font-bold tracking-wider uppercase text-orange-400 group-hover:text-orange-300 transition-colors">
              <span className="relative overflow-hidden group-hover:after:translate-x-0 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-orange-400 after:-translate-x-full after:transition-transform after:duration-300 pb-1">
-              Découvrir
+              {t.home.hobbyButton}
             </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:translate-x-2 transition-transform duration-300">
               <path d="M5 12h14M12 5l7 7-7 7"/>

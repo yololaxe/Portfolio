@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useLanguage } from "@/components/LanguageProvider";
+import LanguageToggle from "@/components/LanguageToggle";
 
 // --- SVG Icons for Social Media ---
 const TwitterIcon = () => <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>;
@@ -20,8 +22,11 @@ const socialLinks = [
 ];
 
 export default function HobbiesHome() {
+  const { t } = useLanguage();
+
   return (
     <div className="bg-[#0a0a0a] text-slate-200 min-h-screen selection:bg-orange-500/30 overflow-hidden relative">
+      <LanguageToggle />
       
       {/* Background Cyberpunk / Tech Grid */}
       <div className="fixed inset-0 z-0 opacity-10 pointer-events-none" style={{ 
@@ -81,11 +86,11 @@ export default function HobbiesHome() {
           
           <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 text-sm font-tech font-bold uppercase tracking-wider mb-8">
             <span className="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse"></span>
-            Créateur de jeux & Développeur
+            {t.hobbiesHome.badge}
           </div>
           
           <p className="text-lg sm:text-xl text-slate-400 max-w-2xl font-tech leading-relaxed mb-12">
-            Bienvenue dans mon univers. Ici, on parle code, conception de jeux vidéos, lore et création de communautés. Explorez mes projets ou rejoignez l'aventure sur les réseaux.
+            {t.hobbiesHome.intro}
           </p>
 
           {/* SOCIAL LINKS QUICK ACCESS */}
@@ -123,7 +128,7 @@ export default function HobbiesHome() {
               style={{ clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)' }}
             >
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              <span className="relative z-10">Voir mes projets</span>
+              <span className="relative z-10">{t.hobbiesHome.buttons.projects}</span>
             </Link>
             
             <Link 
@@ -131,7 +136,7 @@ export default function HobbiesHome() {
               className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border-2 border-orange-500 text-orange-400 font-tech font-bold text-xl uppercase tracking-widest overflow-hidden transition-all hover:bg-orange-500/10"
               style={{ clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)' }}
             >
-              <span className="relative z-10">Hub Social (Actus)</span>
+              <span className="relative z-10">{t.hobbiesHome.buttons.socials}</span>
             </Link>
           </div>
         </motion.header>
@@ -152,15 +157,15 @@ export default function HobbiesHome() {
             
             <div className="relative z-10 p-8 sm:p-16 flex flex-col items-center text-center">
               <h2 className="text-4xl sm:text-5xl font-gaming font-bold text-white mb-4 tracking-widest drop-shadow-lg">RENBLOOD</h2>
-              <p className="text-red-400 font-tech text-xl sm:text-2xl font-bold uppercase tracking-widest mb-8">Le MMORPG Minecraft ultime</p>
+              <p className="text-red-400 font-tech text-xl sm:text-2xl font-bold uppercase tracking-widest mb-8">{t.hobbiesHome.renblood.subtitle}</p>
               <p className="text-slate-300 font-tech text-lg max-w-2xl mx-auto leading-relaxed mb-10">
-                Plongez dans un univers persistant où chaque décision compte. Découvrez le lore, les mécaniques RPG et l'avancement du développement de mon jeu communautaire.
+                {t.hobbiesHome.renblood.desc}
               </p>
               <Link 
                 href="/hobbies/renblood"
                 className="inline-flex items-center gap-3 px-6 py-3 bg-red-600 hover:bg-red-500 text-white font-tech font-bold text-lg uppercase tracking-widest rounded transition-colors shadow-[0_0_20px_rgba(220,38,38,0.5)]"
               >
-                Découvrir Renblood &rarr;
+                {t.hobbiesHome.renblood.button}
               </Link>
             </div>
           </div>
