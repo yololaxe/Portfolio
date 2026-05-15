@@ -12,8 +12,8 @@ export const en = {
       title: "Alban",
       subtitle: "Moragny",
       job: "Master IT Fullstack / Data",
-      description: "Looking for an <strong class=\"text-slate-200\">apprenticeship</strong> for a master's degree. Passionate about software architecture, data and complex problem solving.",
-      status: "Looking for apprenticeship",
+      description: "A <strong class=\"text-slate-200\">fullstack, backend and data</strong> developer building business tools, web applications, and concrete solutions meant for real-world use.",
+      status: "Available for projects",
       cvButton: "Download Resume",
     },
     sections: {
@@ -100,32 +100,23 @@ export const en = {
   contact: {
     title: "Contact",
     titleHighlight: "Me",
-    subtitle: "Feel free to send me a message, I will answer you as soon as possible.",
-    form: {
-        nameLabel: "Name / Company",
-        namePlaceholder: "Your name",
-        emailLabel: "Email",
-        emailPlaceholder: "your@email.com",
-        messageLabel: "Message",
-        messagePlaceholder: "Your message...",
-        submit: "Send Message"
-    },
+    subtitle: "Let's discuss your needs, a project, or a quote request.",
     backButton: "Back to profile"
   },
   entreprise: {
     title: "For",
     titleHighlight: "Companies",
     subtitle: "Discover how I can bring value to your projects.",
-    intro: "I am available for <strong class=\"text-blue-400 font-semibold\">freelance</strong> missions or an <strong class=\"text-blue-400 font-semibold\">apprenticeship</strong>. With my experience in Backend and AI development, I can quickly integrate into a team and produce quality code.",
+    intro: "I offer services through my <strong class=\"text-blue-400 font-semibold\">sole proprietorship</strong> to build or improve web applications, internal tools, and data-oriented solutions. With experience in Backend and AI development, I focus on delivering work that is clear, useful, and production-minded.",
     points: {
       p1: "Creation of robust APIs (Node.js, Python, Go)",
       p2: "Integration of Artificial Intelligence tools",
       p3: "Performance optimization and database management",
     },
     cta: {
-      title: "Ready to collaborate?",
-      subtitle: "Let's discuss your needs and how I can meet them.",
-      button: "Contact me"
+      title: "Need a quote?",
+      subtitle: "Let's discuss your project and how I can help.",
+      button: "Request a quote"
     },
     backButton: "Back to profile"
   },

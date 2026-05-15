@@ -12,8 +12,8 @@ export const fr = {
       title: "Alban",
       subtitle: "Moragny",
       job: "Master Informatique Fullstack / Data",
-      description: "En recherche d'une <strong class=\"text-slate-200\">alternance</strong> pour un master. Passionné par l'architecture logicielle, la donnée et la résolution de problèmes complexes.",
-      status: "En recherche d'alternance",
+      description: "Développeur <strong class=\"text-slate-200\">fullstack, backend et data</strong>. J'interviens sur des outils métier, applications web et solutions utiles, pensés pour un usage concret.",
+      status: "Disponible pour missions",
       cvButton: "Télécharger le CV",
     },
     sections: {
@@ -100,32 +100,23 @@ export const fr = {
   contact: {
     title: "Me",
     titleHighlight: "Contacter",
-    subtitle: "N'hésitez pas à m'envoyer un message, je vous répondrai dans les plus brefs délais.",
-    form: {
-        nameLabel: "Nom / Entreprise",
-        namePlaceholder: "Votre nom",
-        emailLabel: "Email",
-        emailPlaceholder: "votre@email.com",
-        messageLabel: "Message",
-        messagePlaceholder: "Votre message...",
-        submit: "Envoyer le message"
-    },
+    subtitle: "Parlons de votre besoin, d'une mission ou d'une demande de devis.",
     backButton: "Retour au profil"
   },
   entreprise: {
     title: "Pour les",
     titleHighlight: "Entreprises",
     subtitle: "Découvrez comment je peux apporter de la valeur à vos projets.",
-    intro: "Je suis disponible pour des missions en <strong class=\"text-blue-400 font-semibold\">freelance</strong> ou en <strong class=\"text-blue-400 font-semibold\">alternance</strong>. Fort de mon expérience en développement Backend et IA, je suis capable de m'intégrer rapidement dans une équipe et de produire du code de qualité.",
+    intro: "Je propose mes services en <strong class=\"text-blue-400 font-semibold\">micro-entreprise</strong> pour concevoir ou faire évoluer des applications web, des outils internes et des solutions orientées donnée. Fort de mon expérience en développement Backend et IA, je produis un résultat clair, utile et exploitable.",
     points: {
       p1: "Création d'APIs robustes (Node.js, Python, Go)",
       p2: "Intégration d'outils d'Intelligence Artificielle",
       p3: "Optimisation des performances et gestion des bases de données",
     },
     cta: {
-      title: "Prêt à collaborer ?",
-      subtitle: "Discutons de vos besoins et de la façon dont je peux y répondre.",
-      button: "Me contacter"
+      title: "Un besoin, un devis ?",
+      subtitle: "Discutons de votre projet et de la façon dont je peux y répondre.",
+      button: "Demander un devis"
     },
     backButton: "Retour au profil"
   },
