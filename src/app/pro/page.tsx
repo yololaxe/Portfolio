@@ -119,10 +119,12 @@ export default function ProHome() {
     },
     {
       id: 2,
-      title: t.pro.projects.proj1.title,
-      type: t.pro.projects.proj1.type,
-      desc: t.pro.projects.proj1.desc,
-      tags: ["Java", "Flutter", "Firebase", "FullStack"],
+      title: "Renblood - Ecosysteme fullstack & modding",
+      type: isFr ? "Projet personnel professionnel" : "Professional personal project",
+      desc: isFr
+        ? "Conception d'un ecosysteme complet pour un serveur Minecraft semi-RP medieval-fantastique: backend Django REST, site React, mods Forge 1.20.1, economie, PNJ, routes commerciales, quetes, lore et donnees RP centralisees."
+        : "Design of a complete ecosystem for a medieval-fantasy semi-RP Minecraft server: Django REST backend, React website, Forge 1.20.1 mods, economy, NPCs, trade routes, quests, lore, and centralized RP data.",
+      tags: ["Django", "React", "Java Forge", "MongoDB", "Game Design"],
       href: "/pro/realisations/renblood-ecosystem"
     },
     {
